@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React, {Component} from 'react';
 import {API} from '../../utils/API';
 import EmpTable from '../EmpTable';
-import { searchEmployee } from "../../utils/searchEmployee";
-import Search from "../Search";
+import {searchEmployee} from '../../utils/searchEmployee';
+import Search from '../Search';
 
 class Directory extends Component {
     state = { employees: [],
@@ -10,27 +10,29 @@ class Directory extends Component {
         search: ''
     }
 
-    componentMount() {
+    componentDidMount() {
         API.getEmployees()
             .then(response => {
+                console.log(response);
+                let empData = response.data.results.map(emp => {
+                    return {
+                        id: emp.id.value,
+                        picture: emp.picture.medium,
+                        firstName: emp.name.first,
+                        lastName: emp.name.last,
+                        gender: emp.gender,
+                        email: emp.email,
+                        phone: emp.phone,
+                        city: emp.location.city,
+                        state: emp.location.state
+                    }
+                })
                 this.setState({
-                    employees: response.data.results
+                    employees: empData,
+                    loadedEmployees: empData
                 })
             })
-            .catch(err);
-            let empData = response.data.results.map(emp => {
-                return {
-                    id: emp.id.value,
-                    picture: emp.picture.thumbnail,
-                    firstName: emp.name.first,
-                    lastName: emp.name.last,
-                    gender: emp.gender,
-                    email: emp.email,
-                    phone: emp.phone,
-                    city: emp.location.city,
-                    state: emp.location.state
-                }
-            });
+            .catch(err => console.log(err));
     }
 
     handleInputChange = event => {

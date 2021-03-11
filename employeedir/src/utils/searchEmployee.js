@@ -1,4 +1,4 @@
-const searchEmployeeloyee = {
+const searchEmployee = {
     
     searchEmployee: (value, empArr) => {
         let filteredEmps = empArr.filter((emp) => {
@@ -13,4 +13,4 @@ const searchEmployeeloyee = {
     }
 }
 
-export { searchEmployee } 
+export {searchEmployee} 
