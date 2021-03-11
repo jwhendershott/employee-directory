@@ -58,8 +58,8 @@ class Directory extends Component {
         return (
             <div>
                 <h1>Employee Directory</h1>
-                <EmpTable employees={this.state.employees} />
                 <Search employees={this.state.employees} handleInputChange={this.handleInputChange} />
+                <EmpTable employees={this.state.employees} />           
             </div>
         )
     }
